@@ -13,8 +13,8 @@
 
 Данные о погоде также выводятся на OLED.
 
-### esp32-sketch.cpp
+### Файл esp32-sketch.cpp
 Скетч для прошивки ESP32 с помощью ArduinoIDE.
 
-### sunmit_to_db.php
+### Файл submit_to_db.php
 Запись полученных от ESP32 данных в базу данных postgresql.
