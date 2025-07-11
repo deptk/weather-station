@@ -38,8 +38,7 @@ Adafruit_SSD1306 oled(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 // Переменные
 float outdoorTemp;
 float indoorTemp;
-float pressure_hpa_n;
-float pressure_mmhg_n;
+float pressure;
 float pressure_hpa;
 float pressure_mmhg;
 
