@@ -45,7 +45,7 @@ def to_sea_level_pressure(p_hpa, temp_c):
     p0 = p_pa * math.exp((g * ALTITUDE_M) / (R_d * T_k))
     return p0 / 100.0
 
-def periodic_job(ctx):
+async def periodic_job(context: ContextTypes.DEFAULT_TYPE):
     # Периодическая задача: вычисление прогноза погоды по Замбретти
     df = get_pressure_history(hours=WINDOW_HOURS * 2)
     if df.shape[0] < 6:
@@ -144,6 +144,15 @@ def main():
     app.add_handler(CommandHandler("forecast", cmd_forecast))  # команда /forecast
     app.add_handler(CommandHandler("pressure", cmd_pressure))  # команда /pressure
     app.add_handler(CommandHandler("forecast_now", cmd_forecast_now))  # команда /forecast_now — НОВАЯ
+    
+    # Регистрируем periodic_job на запуск раз в WINDOW_HOURS часов
+    interval_seconds = WINDOW_HOURS * 3600
+    app.job_queue.run_repeating(
+        periodic_job,
+        interval=interval_seconds,
+        first=10  # запуск через 10 сек после старта (можно изменить или убрать)
+    )
+    
     app.run_polling()  # запуск опроса Telegram
 
 if __name__ == "__main__":
