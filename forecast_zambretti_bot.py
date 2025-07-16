@@ -145,8 +145,8 @@ def main():
     app.add_handler(CommandHandler("pressure", cmd_pressure))  # команда /pressure
     app.add_handler(CommandHandler("forecast_now", cmd_forecast_now))  # команда /forecast_now — НОВАЯ
     
-    # Регистрируем periodic_job на запуск раз в WINDOW_HOURS часов
-    interval_seconds = WINDOW_HOURS * 3600
+    # Регистрируем periodic_job на запуск раз в час
+    interval_seconds = 3600
     app.job_queue.run_repeating(
         periodic_job,
         interval=interval_seconds,
